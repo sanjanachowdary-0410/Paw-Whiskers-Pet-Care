@@ -1,0 +1,1848 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Paw & Whiskers – Pet Care</title>
+  <!-- Google Fonts: Fredoka for playful headings & Nunito for crisp readability -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <style>
+    /* =========================================
+       1. DESIGN TOKENS & PASTEL COLOR PALETTE
+       ========================================= */
+    :root {
+      --sage: #8da88e;
+      --sage-dark: #6c886d;
+      --sage-light: #e5eee5;
+      --cream: #fdfbf7;
+      --beige: #f4ece1;
+      --peach: #f7c5a8;
+      --peach-light: #fde8dc;
+      --peach-dark: #e69d75;
+      --text-dark: #383e38;
+      --text-muted: #667066;
+      --white: #ffffff;
+      --shadow-sm: 0 6px 18px rgba(56, 62, 56, 0.06);
+      --shadow-md: 0 12px 28px rgba(56, 62, 56, 0.09);
+      --radius-lg: 24px;
+      --radius-md: 16px;
+      --radius-pill: 50px;
+      --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    /* =========================================
+       2. RESET & BASE TYPOGRAPHY
+       ========================================= */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 85px;
+    }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background-color: var(--cream);
+      color: var(--text-dark);
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4, .brand-logo {
+      font-family: 'Fredoka', sans-serif;
+      color: var(--text-dark);
+      line-height: 1.25;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-padding {
+      padding: 90px 0;
+    }
+
+    .section-header {
+      text-align: center;
+      max-width: 660px;
+      margin: 0 auto 55px;
+    }
+
+    .section-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background-color: var(--peach-light);
+      color: var(--peach-dark);
+      font-weight: 700;
+      font-size: 0.88rem;
+      padding: 6px 16px;
+      border-radius: var(--radius-pill);
+      margin-bottom: 12px;
+      letter-spacing: 0.4px;
+    }
+
+    .section-header h2 {
+      font-size: 2.4rem;
+      margin-bottom: 14px;
+    }
+
+    .section-header p {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+    }
+
+    /* =========================================
+       3. BUTTONS
+       ========================================= */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 14px 30px;
+      border-radius: var(--radius-pill);
+      font-family: 'Fredoka', sans-serif;
+      font-weight: 600;
+      font-size: 1.02rem;
+      cursor: pointer;
+      border: none;
+      transition: var(--transition);
+    }
+
+    .btn-primary {
+      background-color: var(--sage);
+      color: var(--white);
+      box-shadow: 0 8px 20px rgba(141, 168, 142, 0.35);
+    }
+
+    .btn-primary:hover {
+      background-color: var(--sage-dark);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 24px rgba(108, 136, 109, 0.4);
+    }
+
+    .btn-secondary {
+      background-color: var(--peach-light);
+      color: var(--text-dark);
+    }
+
+    .btn-secondary:hover {
+      background-color: var(--peach);
+      transform: translateY(-3px);
+    }
+
+    /* =========================================
+       4. NAVIGATION HEADER
+       ========================================= */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(253, 251, 247, 0.92);
+      backdrop-filter: blur(12px);
+      z-index: 1000;
+      box-shadow: 0 2px 15px rgba(0, 0, 0, 0.04);
+      transition: var(--transition);
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 82px;
+    }
+
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.45rem;
+      font-weight: 700;
+      color: var(--sage-dark);
+    }
+
+    .brand-logo .logo-icon {
+      width: 42px;
+      height: 42px;
+      background: var(--peach);
+      color: var(--white);
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      font-size: 1.25rem;
+      transform: rotate(-6deg);
+      transition: var(--transition);
+    }
+
+    .brand-logo:hover .logo-icon {
+      transform: rotate(0deg) scale(1.06);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      list-style: none;
+      gap: 28px;
+    }
+
+    .nav-links a {
+      font-weight: 700;
+      font-size: 0.96rem;
+      color: var(--text-dark);
+      position: relative;
+      transition: var(--transition);
+    }
+
+    .nav-links a:not(.nav-cta)::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 3px;
+      background-color: var(--peach);
+      border-radius: 3px;
+      transition: var(--transition);
+    }
+
+    .nav-links a:not(.nav-cta):hover {
+      color: var(--sage-dark);
+    }
+
+    .nav-links a:not(.nav-cta):hover::after {
+      width: 100%;
+    }
+
+    .nav-cta {
+      padding: 10px 22px;
+      font-size: 0.92rem;
+    }
+
+    .hamburger {
+      display: none;
+      font-size: 1.6rem;
+      color: var(--text-dark);
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+    }
+
+    /* =========================================
+       5. HOME / HERO SECTION
+       ========================================= */
+    .hero {
+      padding: 145px 0 90px;
+      background: linear-gradient(135deg, var(--cream) 0%, var(--beige) 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(45px);
+      z-index: 0;
+      opacity: 0.55;
+      pointer-events: none;
+    }
+
+    .blob-1 {
+      width: 340px;
+      height: 340px;
+      background: var(--sage-light);
+      top: -60px;
+      left: -80px;
+    }
+
+    .blob-2 {
+      width: 320px;
+      height: 320px;
+      background: var(--peach-light);
+      bottom: -60px;
+      right: -50px;
+    }
+
+    .hero-grid {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      align-items: center;
+      gap: 50px;
+    }
+
+    .hero-content h1 {
+      font-size: 3.3rem;
+      margin-bottom: 18px;
+      color: var(--text-dark);
+    }
+
+    .hero-content h1 span {
+      color: var(--sage-dark);
+      position: relative;
+    }
+
+    .hero-tagline {
+      font-size: 1.22rem;
+      font-weight: 700;
+      color: var(--peach-dark);
+      margin-bottom: 14px;
+    }
+
+    .hero-intro {
+      font-size: 1.06rem;
+      color: var(--text-muted);
+      margin-bottom: 32px;
+      max-width: 540px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 38px;
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 32px;
+      padding-top: 22px;
+      border-top: 2px dashed rgba(141, 168, 142, 0.35);
+    }
+
+    .stat-item h4 {
+      font-size: 1.6rem;
+      color: var(--sage-dark);
+    }
+
+    .stat-item p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    /* Dual Pet Photo Collage */
+    .hero-visual {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .pet-photo-card {
+      background: var(--white);
+      padding: 12px;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md);
+      transition: var(--transition);
+    }
+
+    .pet-photo-card:hover {
+      transform: translateY(-6px);
+    }
+
+    .pet-photo-card img {
+      width: 100%;
+      height: 290px;
+      object-fit: cover;
+      border-radius: 18px;
+    }
+
+    .pet-photo-card.cat-card {
+      margin-top: 45px;
+      background: var(--peach-light);
+    }
+
+    .pet-photo-card.dog-card {
+      background: var(--sage-light);
+    }
+
+    .photo-caption {
+      text-align: center;
+      font-family: 'Fredoka', sans-serif;
+      font-size: 0.95rem;
+      margin-top: 10px;
+      color: var(--text-dark);
+    }
+
+    .floating-badge {
+      position: absolute;
+      top: -18px;
+      right: 18px;
+      background: var(--white);
+      padding: 12px 18px;
+      border-radius: var(--radius-pill);
+      box-shadow: var(--shadow-md);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      z-index: 2;
+      animation: floatBounce 3.5s ease-in-out infinite;
+    }
+
+    @keyframes floatBounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    /* =========================================
+       6. AVAILABLE SERVICES SECTION
+       ========================================= */
+    .services-section {
+      background-color: var(--cream);
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+
+    .service-card {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      padding: 34px 28px;
+      box-shadow: var(--shadow-sm);
+      border: 2px solid transparent;
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .service-card:hover {
+      transform: translateY(-8px);
+      border-color: var(--sage-light);
+      box-shadow: var(--shadow-md);
+    }
+
+    .service-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 20px;
+      display: grid;
+      place-items: center;
+      font-size: 1.65rem;
+      margin-bottom: 22px;
+      transition: var(--transition);
+    }
+
+    .service-card:nth-child(odd) .service-icon {
+      background-color: var(--sage-light);
+      color: var(--sage-dark);
+    }
+
+    .service-card:nth-child(even) .service-icon {
+      background-color: var(--peach-light);
+      color: var(--peach-dark);
+    }
+
+    .service-card:hover .service-icon {
+      transform: scale(1.1) rotate(-4deg);
+    }
+
+    .service-card h3 {
+      font-size: 1.32rem;
+      margin-bottom: 12px;
+    }
+
+    .service-card p {
+      color: var(--text-muted);
+      font-size: 0.96rem;
+      margin-bottom: 20px;
+    }
+
+    .service-link {
+      font-weight: 700;
+      font-size: 0.92rem;
+      color: var(--sage-dark);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 0;
+    }
+
+    .service-link:hover {
+      color: var(--peach-dark);
+    }
+
+    /* =========================================
+       7. PET CARE TIPS SECTION
+       ========================================= */
+    .tips-section {
+      background-color: var(--beige);
+      position: relative;
+    }
+
+    .tips-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+    }
+
+    .tip-card {
+      background: var(--cream);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      box-shadow: var(--shadow-sm);
+      position: relative;
+      overflow: hidden;
+      transition: var(--transition);
+    }
+
+    .tip-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 6px;
+      background: linear-gradient(90deg, var(--sage), var(--peach));
+    }
+
+    .tip-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .tip-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+
+    .tip-badge {
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      background: var(--peach-light);
+      color: var(--peach-dark);
+      display: grid;
+      place-items: center;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+
+    .tip-card h3 {
+      font-size: 1.22rem;
+    }
+
+    .tip-card p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    /* =========================================
+       8. VETERINARIAN & TRAINER TEAM SECTION
+       ========================================= */
+    .team-section {
+      background-color: var(--cream);
+    }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+    }
+
+    .team-card {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+      border: 2px solid var(--beige);
+    }
+
+    .team-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .team-img-wrapper {
+      position: relative;
+      height: 290px;
+      overflow: hidden;
+      background: var(--sage-light);
+    }
+
+    .team-img-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .team-card:hover .team-img-wrapper img {
+      transform: scale(1.05);
+    }
+
+    .role-pill {
+      position: absolute;
+      bottom: 14px;
+      left: 14px;
+      background: var(--white);
+      color: var(--sage-dark);
+      font-weight: 700;
+      font-size: 0.82rem;
+      padding: 6px 14px;
+      border-radius: var(--radius-pill);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .role-pill.trainer {
+      color: var(--peach-dark);
+    }
+
+    .team-info {
+      padding: 26px;
+    }
+
+    .team-info h3 {
+      font-size: 1.38rem;
+      margin-bottom: 4px;
+    }
+
+    .team-qual {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--sage-dark);
+      margin-bottom: 12px;
+    }
+
+    .team-details {
+      list-style: none;
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px solid var(--beige);
+      font-size: 0.92rem;
+      color: var(--text-muted);
+    }
+
+    .team-details li {
+      margin-bottom: 6px;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    .team-details i {
+      color: var(--peach-dark);
+      margin-top: 4px;
+    }
+
+    /* =========================================
+       9. APPOINTMENT BOOKING SECTION
+       ========================================= */
+    .booking-section {
+      background: linear-gradient(180deg, var(--sage-light) 0%, var(--cream) 100%);
+    }
+
+    .booking-wrapper {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md);
+      display: grid;
+      grid-template-columns: 0.85fr 1.15fr;
+      overflow: hidden;
+    }
+
+    .booking-sidebar {
+      background: linear-gradient(145deg, var(--sage) 0%, var(--sage-dark) 100%);
+      color: var(--white);
+      padding: 46px 38px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .booking-sidebar h3 {
+      color: var(--white);
+      font-size: 2rem;
+      margin-bottom: 14px;
+    }
+
+    .booking-sidebar p {
+      opacity: 0.92;
+      margin-bottom: 28px;
+    }
+
+    .booking-perks {
+      list-style: none;
+      margin-bottom: 30px;
+    }
+
+    .booking-perks li {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+      font-weight: 600;
+    }
+
+    .booking-perks i {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.2);
+      display: grid;
+      place-items: center;
+      font-size: 0.85rem;
+    }
+
+    .cute-illustration-box {
+      background: rgba(255, 255, 255, 0.14);
+      border-radius: var(--radius-md);
+      padding: 18px;
+      text-align: center;
+    }
+
+    .booking-form-container {
+      padding: 46px 42px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .form-group.full-width {
+      grid-column: span 2;
+    }
+
+    .form-group label {
+      font-weight: 700;
+      font-size: 0.92rem;
+      margin-bottom: 7px;
+      color: var(--text-dark);
+    }
+
+    .form-group label span {
+      color: #d9534f;
+    }
+
+    .form-control {
+      padding: 13px 16px;
+      border-radius: 14px;
+      border: 2px solid var(--beige);
+      background-color: var(--cream);
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.96rem;
+      color: var(--text-dark);
+      transition: var(--transition);
+    }
+
+    .form-control:focus {
+      outline: none;
+      border-color: var(--sage);
+      background-color: var(--white);
+      box-shadow: 0 0 0 4px rgba(141, 168, 142, 0.18);
+    }
+
+    .form-control.error {
+      border-color: #e06c6c;
+      background-color: #fff6f6;
+    }
+
+    .error-msg {
+      color: #d9534f;
+      font-size: 0.82rem;
+      font-weight: 600;
+      margin-top: 5px;
+      display: none;
+    }
+
+    .form-group.has-error .error-msg {
+      display: block;
+    }
+
+    .confirmation-box {
+      display: none;
+      margin-top: 22px;
+      padding: 22px;
+      border-radius: var(--radius-md);
+      background-color: var(--sage-light);
+      border: 2px solid var(--sage);
+      color: var(--text-dark);
+      animation: fadeIn 0.4s ease;
+    }
+
+    .confirmation-box.show {
+      display: block;
+    }
+
+    .confirmation-box h4 {
+      color: var(--sage-dark);
+      font-size: 1.2rem;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* =========================================
+       10. CONTACT INFORMATION & MAP SECTION
+       ========================================= */
+    .contact-section {
+      background-color: var(--cream);
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.15fr;
+      gap: 36px;
+      align-items: stretch;
+    }
+
+    .contact-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .contact-card {
+      background: var(--beige);
+      padding: 24px;
+      border-radius: var(--radius-md);
+      transition: var(--transition);
+    }
+
+    .contact-card:hover {
+      background: var(--peach-light);
+      transform: translateY(-4px);
+    }
+
+    .contact-card i {
+      font-size: 1.45rem;
+      color: var(--sage-dark);
+      margin-bottom: 12px;
+    }
+
+    .contact-card h4 {
+      font-size: 1.1rem;
+      margin-bottom: 6px;
+    }
+
+    .contact-card p {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+    }
+
+    .social-bar {
+      grid-column: span 2;
+      background: var(--white);
+      border: 2px solid var(--beige);
+      padding: 20px 24px;
+      border-radius: var(--radius-md);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .social-icons {
+      display: flex;
+      gap: 12px;
+    }
+
+    .social-icons a {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: var(--sage-light);
+      color: var(--sage-dark);
+      display: grid;
+      place-items: center;
+      font-size: 1.1rem;
+      transition: var(--transition);
+    }
+
+    .social-icons a:hover {
+      background: var(--peach);
+      color: var(--white);
+      transform: translateY(-3px);
+    }
+
+    .map-container {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+      min-height: 360px;
+      border: 4px solid var(--white);
+    }
+
+    .map-container iframe {
+      width: 100%;
+      height: 100%;
+      min-height: 360px;
+      border: 0;
+    }
+
+    /* =========================================
+       11. FOOTER
+       ========================================= */
+    footer {
+      background-color: var(--text-dark);
+      color: #e4e9e4;
+      padding: 65px 0 28px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr;
+      gap: 40px;
+      padding-bottom: 42px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .footer-brand .brand-logo {
+      color: var(--white);
+      margin-bottom: 14px;
+    }
+
+    .footer-brand p {
+      color: #b8c2b8;
+      font-size: 0.95rem;
+      max-width: 340px;
+    }
+
+    footer h4 {
+      color: var(--peach);
+      font-size: 1.15rem;
+      margin-bottom: 18px;
+    }
+
+    .footer-links {
+      list-style: none;
+    }
+
+    .footer-links li {
+      margin-bottom: 10px;
+    }
+
+    .footer-links a {
+      color: #cfd8cf;
+      font-size: 0.95rem;
+      transition: var(--transition);
+    }
+
+    .footer-links a:hover {
+      color: var(--peach);
+      padding-left: 5px;
+    }
+
+    .footer-contact p {
+      color: #cfd8cf;
+      font-size: 0.94rem;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .footer-contact i {
+      color: var(--peach);
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 24px;
+      font-size: 0.9rem;
+      color: #a3afa3;
+    }
+
+    /* =========================================
+       12. SCROLL REVEAL ANIMATION
+       ========================================= */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* =========================================
+       13. RESPONSIVE MEDIA QUERIES
+       ========================================= */
+    @media (max-width: 992px) {
+      .hero-grid,
+      .booking-wrapper,
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-content h1 {
+        font-size: 2.7rem;
+      }
+
+      .services-grid,
+      .team-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hamburger {
+        display: block;
+      }
+
+      .nav-links {
+        position: fixed;
+        top: 82px;
+        left: 0;
+        width: 100%;
+        background: var(--cream);
+        flex-direction: column;
+        padding: 28px 0;
+        gap: 20px;
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+        transform: translateY(-130%);
+        opacity: 0;
+        transition: var(--transition);
+        pointer-events: none;
+      }
+
+      .nav-links.active {
+        transform: translateY(0);
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .hero {
+        padding-top: 120px;
+      }
+
+      .hero-content h1 {
+        font-size: 2.25rem;
+      }
+
+      .hero-visual {
+        grid-template-columns: 1fr;
+      }
+
+      .pet-photo-card.cat-card {
+        margin-top: 0;
+      }
+
+      .services-grid,
+      .team-grid,
+      .contact-cards,
+      .form-grid,
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .form-group.full-width,
+      .social-bar {
+        grid-column: span 1;
+      }
+
+      .booking-sidebar,
+      .booking-form-container {
+        padding: 32px 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- =========================================
+       NAVIGATION HEADER
+       ========================================= -->
+  <header>
+    <div class="container navbar">
+      <a href="#home" class="brand-logo">
+        <span class="logo-icon"><i class="fa-solid fa-paw"></i></span>
+        Paw & Whiskers
+      </a>
+
+      <button class="hamburger" id="hamburgerBtn" aria-label="Toggle navigation">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#tips">Pet Care Tips</a></li>
+        <li><a href="#team">Our Team</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="#appointment" class="btn btn-primary nav-cta">Book Now</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- =========================================
+       1. HOME / HERO SECTION
+       ========================================= -->
+  <section id="home" class="hero">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+
+    <div class="container hero-grid">
+      <div class="hero-content">
+        <div class="section-badge">
+          <i class="fa-solid fa-heart"></i> Gentle & Loving Pet Wellness
+        </div>
+        <p class="hero-tagline">Where Every Tail Wags & Every Purr Matters</p>
+        <h1>Happy, Healthy Pets Start at <span>Paw & Whiskers</span></h1>
+        <p class="hero-intro">
+          Welcome to your neighborhood sanctuary for comprehensive veterinary care, gentle spa grooming, positive behavioral training, and cozy daycare. We treat your furry family members with the warmth, patience, and expertise they deserve.
+        </p>
+
+        <div class="hero-actions">
+          <a href="#appointment" class="btn btn-primary">
+            <i class="fa-solid fa-calendar-check"></i> Book an Appointment
+          </a>
+          <a href="#services" class="btn btn-secondary">
+            Explore Services
+          </a>
+        </div>
+
+        <div class="hero-stats">
+          <div class="stat-item">
+            <h4>4,500+</h4>
+            <p>Happy Pets Cared For</p>
+          </div>
+          <div class="stat-item">
+            <h4>12+ Yrs</h4>
+            <p>Veterinary Excellence</p>
+          </div>
+          <div class="stat-item">
+            <h4>4.9 ★</h4>
+            <p>Pet Parent Rating</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="floating-badge">
+          <!-- Custom Cute Paw Vector Illustration -->
+          <svg width="24" height="24" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <ellipse cx="32" cy="42" rx="14" ry="11" fill="#8DA88E"/>
+            <circle cx="16" cy="26" r="6" fill="#F7C5A8"/>
+            <circle cx="27" cy="18" r="6" fill="#F7C5A8"/>
+            <circle cx="39" cy="18" r="6" fill="#F7C5A8"/>
+            <circle cx="49" cy="26" r="6" fill="#F7C5A8"/>
+          </svg>
+          <span>Fear-Free Certified Clinic</span>
+        </div>
+
+        <div class="pet-photo-card dog-card">
+          <img
+            src="https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&w=600&q=80"
+            onerror="this.onerror=null;this.src='https://placehold.co/400x300/e5eee5/383e38?text=Happy+Puppy';"
+            alt="Happy golden puppy smiling"
+          />
+          <p class="photo-caption">🐶 Gentle Puppy Care</p>
+        </div>
+
+        <div class="pet-photo-card cat-card">
+          <img
+            src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&w=600&q=80"
+            onerror="this.onerror=null;this.src='https://placehold.co/400x300/fde8dc/383e38?text=Cozy+Kitten';"
+            alt="Cute fluffy cat looking curious"
+          />
+          <p class="photo-caption">🐱 Cozy Feline Comfort</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================
+       2. AVAILABLE SERVICES SECTION
+       ========================================= -->
+  <section id="services" class="services-section section-padding">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-badge"><i class="fa-solid fa-stethoscope"></i> Our Services</div>
+        <h2>Complete Care Under One Cozy Roof</h2>
+        <p>From routine nose-to-tail wellness exams to pampering spa days, our services are tailored to every stage of your pet’s life.</p>
+      </div>
+
+      <div class="services-grid">
+        <!-- Service 1 -->
+        <div class="service-card reveal">
+          <div>
+            <div class="service-icon"><i class="fa-solid fa-heart-pulse"></i></div>
+            <h3>Veterinary Check-Ups</h3>
+            <p>Comprehensive nose-to-tail physical exams, dental assessments, and preventive diagnostics to catch health issues early.</p>
+          </div>
+          <a href="#appointment" class="service-link" data-service="Veterinary Check-Ups">
+            Schedule Check-Up <i class="fa-solid fa-arrow-right"></i>
+          </a>
+        </div>
+
+        <!-- Service 2 -->
+        <div class="service-card reveal">
+          <div>
+            <div class="service-icon"><i class="fa-solid fa-syringe"></i></div>
+            <h3>Vaccination</h3>
+            <p>Customized core and lifestyle immunization schedules for puppies, kittens, and adult pets to protect against preventable diseases.</p>
+          </div>
+          <a href="#appointment" class="service-link" data-service="Vaccination">
+            Book Vaccination <i class="fa-solid fa-arrow-right"></i>
+          </a>
+        </div>
+
+        <!-- Service 3 -->
+        <div class="service-card reveal">
+          <div>
+            <div class="service-icon"><i class="fa-solid fa-bath"></i></div>
+            <h3>Pet Grooming & Bathing</h3>
+            <p>Soothing oatmeal baths, breed-specific styling, gentle nail trims, ear cleaning, and de-shedding spa treatments.</p>
+          </div>
+          <a href="#appointment" class="service-link" data-service="Pet Grooming and Bathing">
+            Book Spa Session <i class="fa-solid fa-arrow-right"></i>
+          </a>
+        </div>
+
+        <!-- Service 4 -->
+        <div class="service-card reveal">
+          <div>
+            <div class="service-icon"><i class="fa-solid fa-award"></i></div>
+            <h3>Pet Training</h3>
+            <p>Positive-reinforcement puppy socialization, basic obedience, leash manners, and anxiety-reduction behavioral coaching.</p>
+          </div>
+          <a href="#appointment" class="service-link" data-service="Pet Training">
+            Join Training <i class="fa-solid fa-arrow-right"></i>
+          </a>
+        </div>
+
+        <!-- Service 5 -->
+        <div class="service-card reveal">
+          <div>
+            <div class="service-icon"><i class="fa-solid fa-bowl-food"></i></div>
+            <h3>Nutrition Guidance</h3>
+            <p>Personalized diet plans, allergy management, and healthy weight programs crafted by our certified pet nutrition specialists.</p>
+          </div>
+          <a href="#appointment" class="service-link" data-service="Nutrition Guidance">
+            Get Diet Plan <i class="fa-solid fa-arrow-right"></i>
+          </a>
+        </div>
+
+        <!-- Service 6 -->
+        <div class="service-card reveal">
+          <div>
+            <div class="service-icon"><i class="fa-solid fa-house-chimney-window"></i></div>
+            <h3>Pet Daycare</h3>
+            <p>Safe, supervised playgroups, cozy nap suites, and enrichment activities while you work or run errands.</p>
+          </div>
+          <a href="#appointment" class="service-link" data-service="Pet Daycare">
+            Reserve Daycare <i class="fa-solid fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================
+       3. PET CARE TIPS SECTION
+       ========================================= -->
+  <section id="tips" class="tips-section section-padding">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-badge"><i class="fa-solid fa-lightbulb"></i> Daily Wellness Guide</div>
+        <h2>Helpful Pet Care Tips</h2>
+        <p>Simple, vet-approved habits that keep your furry companions thriving, energized, and full of joy every single day.</p>
+      </div>
+
+      <div class="tips-grid">
+        <!-- Tip 1 -->
+        <div class="tip-card reveal">
+          <div class="tip-header">
+            <div class="tip-badge"><i class="fa-solid fa-bone"></i></div>
+            <h3>Healthy Feeding Habits</h3>
+          </div>
+          <p>Feed measured, age-appropriate portions on a consistent schedule rather than free-feeding. Limit treats to under 10% of daily calories to maintain a healthy weight.</p>
+        </div>
+
+        <!-- Tip 2 -->
+        <div class="tip-card reveal">
+          <div class="tip-header">
+            <div class="tip-badge"><i class="fa-solid fa-droplet"></i></div>
+            <h3>Importance of Fresh Water</h3>
+          </div>
+          <p>Refresh water bowls at least twice daily and wash bowls with mild soap. Proper hydration supports kidney function, digestion, and shiny coats—especially for cats.</p>
+        </div>
+
+        <!-- Tip 3 -->
+        <div class="tip-card reveal">
+          <div class="tip-header">
+            <div class="tip-badge"><i class="fa-solid fa-scissors"></i></div>
+            <h3>Grooming & Hygiene</h3>
+          </div>
+          <p>Brush your pet’s coat weekly to prevent matting and distribute natural skin oils. Pair regular brushing with weekly tooth brushing and monthly nail trims.</p>
+        </div>
+
+        <!-- Tip 4 -->
+        <div class="tip-card reveal">
+          <div class="tip-header">
+            <div class="tip-badge"><i class="fa-solid fa-baseball"></i></div>
+            <h3>Exercise & Playtime</h3>
+          </div>
+          <p>Provide daily physical activity and puzzle toys for mental stimulation. Interactive play reduces boredom, prevents destructive habits, and strengthens your bond.</p>
+        </div>
+
+        <!-- Tip 5 -->
+        <div class="tip-card reveal">
+          <div class="tip-header">
+            <div class="tip-badge"><i class="fa-solid fa-notes-medical"></i></div>
+            <h3>Regular Health Check-Ups</h3>
+          </div>
+          <p>Schedule annual wellness visits (or bi-annual for senior pets) even when your pet looks healthy. Preventive screenings detect subtle changes before symptoms appear.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================
+       4. VETERINARIAN & TRAINER INFORMATION
+       ========================================= -->
+  <section id="team" class="team-section section-padding">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-badge"><i class="fa-solid fa-user-doctor"></i> Meet Our Experts</div>
+        <h2>Caring Hands & Gentle Hearts</h2>
+        <p>Our licensed veterinarians and certified animal behaviorists combine medical precision with genuine affection.</p>
+      </div>
+
+      <div class="team-grid">
+        <!-- Vet 1 -->
+        <div class="team-card reveal">
+          <div class="team-img-wrapper">
+            <img
+              src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=600&q=80"
+              onerror="this.onerror=null;this.src='https://placehold.co/400x300/e5eee5/383e38?text=Dr.+Clara+Bennett';"
+              alt="Dr. Clara Bennett"
+            />
+            <span class="role-pill">Chief Veterinarian</span>
+          </div>
+          <div class="team-info">
+            <h3>Dr. Clara Bennett</h3>
+            <p class="team-qual">DVM, MS • 12 Years Experience</p>
+            <p>Passionate about fear-free feline and canine medicine, Dr. Bennett ensures every exam feels calm and stress-free.</p>
+            <ul class="team-details">
+              <li><i class="fa-solid fa-star"></i> <span><strong>Specialization:</strong> Preventive Medicine, Internal Care & Feline Wellness</span></li>
+              <li><i class="fa-solid fa-graduation-cap"></i> <span>Cornell University College of Veterinary Medicine</span></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Vet 2 -->
+        <div class="team-card reveal">
+          <div class="team-img-wrapper">
+            <img
+              src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&w=600&q=80"
+              onerror="this.onerror=null;this.src='https://placehold.co/400x300/e5eee5/383e38?text=Dr.+Julian+Vance';"
+              alt="Dr. Julian Vance"
+            />
+            <span class="role-pill">Senior Veterinarian</span>
+          </div>
+          <div class="team-info">
+            <h3>Dr. Julian Vance</h3>
+            <p class="team-qual">DVM, DACVN • 9 Years Experience</p>
+            <p>Dedicated to helping pets live longer, active lives through tailored clinical nutrition and minimally invasive dentistry.</p>
+            <ul class="team-details">
+              <li><i class="fa-solid fa-star"></i> <span><strong>Specialization:</strong> Pet Nutrition, Dentistry & Geriatric Pet Care</span></li>
+              <li><i class="fa-solid fa-graduation-cap"></i> <span>UC Davis School of Veterinary Medicine</span></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Trainer -->
+        <div class="team-card reveal">
+          <div class="team-img-wrapper">
+            <img
+              src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=600&q=80"
+              onerror="this.onerror=null;this.src='https://placehold.co/400x300/fde8dc/383e38?text=Maya+Lin';"
+              alt="Maya Lin"
+            />
+            <span class="role-pill trainer">Lead Pet Trainer</span>
+          </div>
+          <div class="team-info">
+            <h3>Maya Lin</h3>
+            <p class="team-qual">CPDT-KA • 8 Years Experience</p>
+            <p>Maya uses science-backed, force-free positive reinforcement to build trust and clear communication between pets and families.</p>
+            <ul class="team-details">
+              <li><i class="fa-solid fa-star"></i> <span><strong>Training Services:</strong> Puppy Kindergarten, Leash Manners, Clicker & Separation Anxiety Coaching</span></li>
+              <li><i class="fa-solid fa-certificate"></i> <span>Certified Professional Dog & Cat Behavior Specialist</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================
+       5. APPOINTMENT BOOKING SECTION
+       ========================================= -->
+  <section id="appointment" class="booking-section section-padding">
+    <div class="container">
+      <div class="booking-wrapper reveal">
+        <!-- Left Info Panel -->
+        <div class="booking-sidebar">
+          <div>
+            <h3>Book a Cozy Visit</h3>
+            <p>Reserve a check-up, spa grooming, or training session in less than a minute. Our care coordinator will confirm right away!</p>
+
+            <ul class="booking-perks">
+              <li><i class="fa-solid fa-check"></i> Zero-wait calming lobby</li>
+              <li><i class="fa-solid fa-check"></i> Separate cat & dog comfort zones</li>
+              <li><i class="fa-solid fa-check"></i> Complimentary organic treats</li>
+              <li><i class="fa-solid fa-check"></i> Flexible rescheduling anytime</li>
+            </ul>
+          </div>
+
+          <!-- Cute SVG Cat & Puppy Illustration -->
+          <div class="cute-illustration-box">
+            <svg width="150" height="105" viewBox="0 0 200 140" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin: 0 auto;">
+              <!-- Cute Cat Silhouette -->
+              <path d="M52 45L44 22L65 36C70 34 76 34 81 36L102 22L94 45C101 53 105 63 105 74C105 95 89 110 73 110C57 110 41 95 41 74C41 63 45 53 52 45Z" fill="#FDE8DC"/>
+              <circle cx="62" cy="68" r="4" fill="#383E38"/>
+              <circle cx="84" cy="68" r="4" fill="#383E38"/>
+              <path d="M70 76L73 80L76 76H70Z" fill="#E69D75"/>
+              <path d="M66 84C69 87 77 87 80 84" stroke="#383E38" stroke-width="2.5" stroke-linecap="round"/>
+              <!-- Cute Puppy Silhouette -->
+              <ellipse cx="142" cy="78" rx="28" ry="26" fill="#FDFBF7"/>
+              <ellipse cx="114" cy="72" rx="9" ry="18" transform="rotate(15 114 72)" fill="#F7C5A8"/>
+              <ellipse cx="170" cy="72" rx="9" ry="18" transform="rotate(-15 170 72)" fill="#F7C5A8"/>
+              <circle cx="133" cy="72" r="4" fill="#383E38"/>
+              <circle cx="151" cy="72" r="4" fill="#383E38"/>
+              <ellipse cx="142" cy="80" rx="5" ry="3.5" fill="#383E38"/>
+              <path d="M136 86C139 90 145 90 148 86" stroke="#383E38" stroke-width="2.5" stroke-linecap="round"/>
+            </svg>
+            <p style="font-size: 0.88rem; margin-top: 6px; font-weight: 600;">We can't wait to meet your best friend!</p>
+          </div>
+        </div>
+
+        <!-- Right Interactive Form -->
+        <div class="booking-form-container">
+          <form id="appointmentForm" novalidate>
+            <div class="form-grid">
+              <!-- Owner's Name -->
+              <div class="form-group" id="group-ownerName">
+                <label for="ownerName">Owner's Name <span>*</span></label>
+                <input type="text" id="ownerName" class="form-control" placeholder="e.g., Sarah Jenkins" required />
+                <span class="error-msg">Please enter your full name.</span>
+              </div>
+
+              <!-- Contact Number -->
+              <div class="form-group" id="group-phone">
+                <label for="phone">Contact Number <span>*</span></label>
+                <input type="tel" id="phone" class="form-control" placeholder="e.g., (555) 234-5678" required />
+                <span class="error-msg">Please enter a valid phone number (at least 7 digits).</span>
+              </div>
+
+              <!-- Pet's Name -->
+              <div class="form-group" id="group-petName">
+                <label for="petName">Pet's Name <span>*</span></label>
+                <input type="text" id="petName" class="form-control" placeholder="e.g., Mochi" required />
+                <span class="error-msg">Please enter your pet's name.</span>
+              </div>
+
+              <!-- Pet Type & Age -->
+              <div class="form-group" id="group-petTypeAge">
+                <label for="petTypeAge">Pet Type & Age <span>*</span></label>
+                <input type="text" id="petTypeAge" class="form-control" placeholder="e.g., Golden Retriever, 2 yrs" required />
+                <span class="error-msg">Please specify pet type and age.</span>
+              </div>
+
+              <!-- Required Service -->
+              <div class="form-group full-width" id="group-service">
+                <label for="serviceSelect">Select Required Service <span>*</span></label>
+                <select id="serviceSelect" class="form-control" required>
+                  <option value="">-- Choose a service --</option>
+                  <option value="Veterinary Check-Ups">Veterinary Check-Ups</option>
+                  <option value="Vaccination">Vaccination</option>
+                  <option value="Pet Grooming and Bathing">Pet Grooming and Bathing</option>
+                  <option value="Pet Training">Pet Training</option>
+                  <option value="Nutrition Guidance">Nutrition Guidance</option>
+                  <option value="Pet Daycare">Pet Daycare</option>
+                </select>
+                <span class="error-msg">Please select a service.</span>
+              </div>
+
+              <!-- Preferred Date -->
+              <div class="form-group" id="group-date">
+                <label for="apptDate">Preferred Date <span>*</span></label>
+                <input type="date" id="apptDate" class="form-control" required />
+                <span class="error-msg">Please pick a valid future date.</span>
+              </div>
+
+              <!-- Preferred Time -->
+              <div class="form-group" id="group-time">
+                <label for="apptTime">Preferred Time <span>*</span></label>
+                <input type="time" id="apptTime" class="form-control" required />
+                <span class="error-msg">Please select a preferred time.</span>
+              </div>
+
+              <!-- Additional Message -->
+              <div class="form-group full-width">
+                <label for="notes">Additional Message (Optional)</label>
+                <textarea id="notes" rows="3" class="form-control" placeholder="Tell us about any allergies, favorite treats, or special requests..."></textarea>
+              </div>
+
+              <!-- Submit Button -->
+              <div class="form-group full-width">
+                <button type="submit" class="btn btn-primary" style="width: 100%;">
+                  <i class="fa-solid fa-paw"></i> Confirm Appointment
+                </button>
+              </div>
+            </div>
+          </form>
+
+          <!-- Interactive Confirmation Message -->
+          <div id="confirmationBox" class="confirmation-box" role="alert">
+            <h4><i class="fa-solid fa-circle-check"></i> Appointment Request Confirmed!</h4>
+            <p id="confirmationText"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================
+       6. CONTACT INFORMATION & MAP SECTION
+       ========================================= -->
+  <section id="contact" class="contact-section section-padding">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-badge"><i class="fa-solid fa-location-dot"></i> Visit Us</div>
+        <h2>Get in Touch & Find Our Clinic</h2>
+        <p>Have a question about your pet’s health or daycare availability? Reach out or stop by for a tour!</p>
+      </div>
+
+      <div class="contact-grid reveal">
+        <div class="contact-cards">
+          <!-- Address -->
+          <div class="contact-card">
+            <i class="fa-solid fa-map-pin"></i>
+            <h4>Clinic Address</h4>
+            <p>742 Meadowbrook Lane, Suite 102<br />Willow Creek, OR 97205</p>
+          </div>
+
+          <!-- Phone -->
+          <div class="contact-card">
+            <i class="fa-solid fa-phone-volume"></i>
+            <h4>Phone Number</h4>
+            <p>Main: (503) 555-0194<br />24/7 Urgent Line: (503) 555-0199</p>
+          </div>
+
+          <!-- Email -->
+          <div class="contact-card">
+            <i class="fa-solid fa-envelope-open-text"></i>
+            <h4>Email Address</h4>
+            <p>hello@pawandwhiskers.com<br />care@pawandwhiskers.com</p>
+          </div>
+
+          <!-- Working Hours -->
+          <div class="contact-card">
+            <i class="fa-solid fa-clock"></i>
+            <h4>Working Hours</h4>
+            <p>Mon – Fri: 8:00 AM – 7:00 PM<br />Sat – Sun: 9:00 AM – 5:00 PM</p>
+          </div>
+
+          <!-- Social Media Bar -->
+          <div class="social-bar">
+            <div>
+              <h4>Follow Our Furry Friends</h4>
+              <p style="font-size: 0.88rem; color: var(--text-muted);">Daily pet tips & adorable patient spotlights</p>
+            </div>
+            <div class="social-icons">
+              <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+              <a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+              <a href="https://twitter.com" target="_blank" rel="noopener" aria-label="X Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+              <a href="https://youtube.com" target="_blank" rel="noopener" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Embedded Google Map -->
+        <div class="map-container">
+          <iframe
+            title="Paw & Whiskers Clinic Map Location"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d44726.31426227262!2d-122.7144314!3d45.5230622!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x54950b0b7da97427%3A0x1c36b9e6f6d18591!2sPortland%2C%20OR!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================
+       7. FOOTER
+       ========================================= -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <!-- Brand & Logo -->
+        <div class="footer-brand">
+          <a href="#home" class="brand-logo">
+            <span class="logo-icon"><i class="fa-solid fa-paw"></i></span>
+            Paw & Whiskers – Pet Care
+          </a>
+          <p>
+            Dedicated to compassionate veterinary medicine, gentle grooming, and joyful enrichment for dogs, cats, and their loving humans.
+          </p>
+        </div>
+
+        <!-- Quick Links -->
+        <div>
+          <h4>Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#services">Available Services</a></li>
+            <li><a href="#tips">Pet Care Tips</a></li>
+            <li><a href="#team">Veterinarians & Trainers</a></li>
+            <li><a href="#appointment">Book an Appointment</a></li>
+          </ul>
+        </div>
+
+        <!-- Footer Contact -->
+        <div class="footer-contact">
+          <h4>Contact Us</h4>
+          <p><i class="fa-solid fa-location-dot"></i> 742 Meadowbrook Lane, Willow Creek</p>
+          <p><i class="fa-solid fa-phone"></i> (503) 555-0194</p>
+          <p><i class="fa-solid fa-envelope"></i> hello@pawandwhiskers.com</p>
+          <p><i class="fa-solid fa-clock"></i> Open Daily: 8:00 AM – 7:00 PM</p>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 Paw & Whiskers – Pet Care. Made with <i class="fa-solid fa-heart" style="color: var(--peach);"></i> for pets everywhere. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- =========================================
+       JAVASCRIPT INTERACTIVITY & VALIDATION
+       ========================================= -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      try {
+        /* 1. Mobile Navigation Toggle */
+        const hamburgerBtn = document.getElementById('hamburgerBtn');
+        const navLinks = document.getElementById('navLinks');
+
+        if (hamburgerBtn && navLinks) {
+          hamburgerBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            const icon = hamburgerBtn.querySelector('i');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-xmark');
+          });
+
+          // Close mobile menu when clicking a navigation link
+          navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+              navLinks.classList.remove('active');
+              const icon = hamburgerBtn.querySelector('i');
+              icon.classList.add('fa-bars');
+              icon.classList.remove('fa-xmark');
+            });
+          });
+        }
+
+        /* 2. Auto-select Service when clicking a Service Card CTA */
+        const serviceSelect = document.getElementById('serviceSelect');
+        document.querySelectorAll('.service-link').forEach(link => {
+          link.addEventListener('click', () => {
+            const chosenService = link.getAttribute('data-service');
+            if (chosenService && serviceSelect) {
+              serviceSelect.value = chosenService;
+            }
+          });
+        });
+
+        /* 3. Set Minimum Appointment Date to Today */
+        const apptDateInput = document.getElementById('apptDate');
+        const today = new Date().toISOString().split('T')[0];
+        if (apptDateInput) {
+          apptDateInput.setAttribute('min', today);
+        }
+
+        /* 4. Scroll Reveal Animation via IntersectionObserver */
+        const revealElements = document.querySelectorAll('.reveal');
+        if ('IntersectionObserver' in window) {
+          const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                revealObserver.unobserve(entry.target);
+              }
+            });
+          }, { threshold: 0.12 });
+
+          revealElements.forEach(el => revealObserver.observe(el));
+        } else {
+          revealElements.forEach(el => el.classList.add('visible'));
+        }
+
+        /* 5. Interactive Appointment Form Validation */
+        const form = document.getElementById('appointmentForm');
+        const confirmationBox = document.getElementById('confirmationBox');
+        const confirmationText = document.getElementById('confirmationText');
+
+        const setFieldError = (groupId, inputEl, hasError) => {
+          const group = document.getElementById(groupId);
+          if (!group || !inputEl) return;
+          if (hasError) {
+            group.classList.add('has-error');
+            inputEl.classList.add('error');
+          } else {
+            group.classList.remove('has-error');
+            inputEl.classList.remove('error');
+          }
+        };
+
+        if (form) {
+          form.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const ownerName = document.getElementById('ownerName');
+            const phone = document.getElementById('phone');
+            const petName = document.getElementById('petName');
+            const petTypeAge = document.getElementById('petTypeAge');
+            const service = document.getElementById('serviceSelect');
+            const date = document.getElementById('apptDate');
+            const time = document.getElementById('apptTime');
+
+            let isValid = true;
+
+            // Validate Owner Name
+            if (ownerName.value.trim().length < 2) {
+              setFieldError('group-ownerName', ownerName, true);
+              isValid = false;
+            } else {
+              setFieldError('group-ownerName', ownerName, false);
+            }
+
+            // Validate Phone (at least 7 digits)
+            const digitsOnly = phone.value.replace(/\D/g, '');
+            if (digitsOnly.length < 7) {
+              setFieldError('group-phone', phone, true);
+              isValid = false;
+            } else {
+              setFieldError('group-phone', phone, false);
+            }
+
+            // Validate Pet Name
+            if (petName.value.trim().length < 1) {
+              setFieldError('group-petName', petName, true);
+              isValid = false;
+            } else {
+              setFieldError('group-petName', petName, false);
+            }
+
+            // Validate Pet Type & Age
+            if (petTypeAge.value.trim().length < 2) {
+              setFieldError('group-petTypeAge', petTypeAge, true);
+              isValid = false;
+            } else {
+              setFieldError('group-petTypeAge', petTypeAge, false);
+            }
+
+            // Validate Service Selection
+            if (!service.value) {
+              setFieldError('group-service', service, true);
+              isValid = false;
+            } else {
+              setFieldError('group-service', service, false);
+            }
+
+            // Validate Date
+            if (!date.value || date.value < today) {
+              setFieldError('group-date', date, true);
+              isValid = false;
+            } else {
+              setFieldError('group-date', date, false);
+            }
+
+            // Validate Time
+            if (!time.value) {
+              setFieldError('group-time', time, true);
+              isValid = false;
+            } else {
+              setFieldError('group-time', time, false);
+            }
+
+            if (!isValid) {
+              confirmationBox.classList.remove('show');
+              return;
+            }
+
+            // Format date nicely for confirmation message
+            const formattedDate = new Date(date.value + 'T00:00:00').toLocaleDateString('en-US', {
+              weekday: 'long',
+              month: 'short',
+              day: 'numeric',
+              year: 'numeric'
+            });
+
+            confirmationText.innerHTML = `
+              Thank you, <strong>${ownerName.value.trim()}</strong>! We have reserved a <strong>${service.value}</strong> visit for <strong>${petName.value.trim()}</strong> (${petTypeAge.value.trim()}) on <strong>${formattedDate}</strong> at <strong>${time.value}</strong>. We'll send a reminder to <strong>${phone.value.trim()}</strong> shortly!
+            `;
+
+            confirmationBox.classList.add('show');
+            form.reset();
+            if (apptDateInput) {
+              apptDateInput.setAttribute('min', today);
+            }
+          });
+        }
+      } catch (err) {
+        console.error('Initialization error:', err);
+      }
+    });
+  </script>
+</body>
+</html>
